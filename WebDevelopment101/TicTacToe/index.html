@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // prompt user for a move
+                // make it lowercase, refuse if not in the list of allowed moves
+        // if it s a valid move :
+            // call computerPlay to get a string based on a random number between 1-3
+            // then call playRound with both player and computer strings
+            // compare the two strings to model the different interactions
+            // return the winner
+
+        let playerScore = 0;
+        let computerScore = 0;
+
+        function computerPlay() {
+            let randomInt = Math.floor((Math.random() * 3) + 1);
+            if (randomInt === 1) {
+                return "rock";
+            } else if (randomInt === 2) {
+                return "paper";
+            } else {
+                return "scissors";
+            }
+        }
+
+        function playRound(playerMove, computerMove) {
+            if (playerMove === computerMove) {
+                return "It's a tie!"
+            } else if (playerMove === "rock" && computerMove === "paper") {
+                computerScore += 1;
+                return "Computer Wins! Paper beats Rock."
+            } else if (playerMove === "paper" && computerMove === "rock") {
+                playerScore += 1;
+                return "Player Wins! Paper beats Rock."
+            } else if (playerMove === "scissors" && computerMove === "rock") {
+                computerScore += 1;
+                return "Computer Wins! Rock beats Scissors."
+            } else if (playerMove === "rock" && computerMove === "scissors") {
+                playerScore += 1;
+                return "Player Wins! Rock beats Scissors."
+            }  else if (playerMove === "paper" && computerMove === "scissors") {
+                computerScore += 1;
+                return "Computer Wins! Scissors beat Paper."
+            } else if (playerMove === "scissors" && computerMove === "paper") {
+                playerScore += 1;
+                return "Player Wins! Scissors beat Paper."
+            } 
+        }
+
+        function game() {
+            let computerSelection, playerSelection;
+
+            while (!["rock", "paper", "scissors"].includes(playerSelection))
+            {
+                playerSelection = prompt("Choose your next move (rock, paper, scissors): ");
+                playerSelection = playerSelection.toLowerCase();
+            }
+            computerSelection = computerPlay();
+            console.log("Player Move is " + playerSelection);
+            console.log("Computer Move is " + computerSelection);
+            console.log(playRound(playerSelection, computerSelection));
+        }
+
+        let i = 0;
+        while (i < 6) {
+            game();
+            i++;
+        }
+
+        console.log("End of the game!")
+        if (playerScore === computerScore) {
+            console.log(`It's a tie! ${playerScore} to ${computerScore}`);
+        } else if (playerScore > computerScore) {
+            console.log(`Player wins! ${playerScore} to ${computerScore}`);
+        } else {
+            console.log(`Computer wins! ${computerScore} to ${playerScore}`);
+        }
+
+    
+    </script>
+</body>
+</html>
