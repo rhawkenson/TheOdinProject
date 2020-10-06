@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table generated with DOM JS</title>
+    <style>
+
+        table, tr, td, th {
+            border: solid 1px #000;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+        .mountainTable {
+            min-width: 640px;
+            margin: 5%;
+            font-size: 18px;
+            text-align: center;
+            align-items: center;
+        }
+
+        .tableHeader {
+            font-size: 24px;
+            font-weight: 600;
+            background-color: #ccc;
+        }
+
+        .numberColumn {
+            text-align: right;
+            color: #0000ff;
+            text-decoration: italic;
+        }
+    </style>
+</head>
+<body>
+    <div id="mountains"></div>
+
+    <script>
+    
+        const MOUNTAINS = [
+          {name: "Kilimanjaro", height: 5895, place: "Tanzania"},
+          {name: "Everest", height: 8848, place: "Nepal"},
+          {name: "Mount Fuji", height: 3776, place: "Japan"},
+          {name: "Vaalserberg", height: 323, place: "Netherlands"},
+          {name: "Denali", height: 6168, place: "United States"},
+          {name: "Popocatepetl", height: 5465, place: "Mexico"},
+          {name: "Mont Blanc", height: 4808, place: "Italy/France"}
+        ];
+      
+        const mntDiv = document.querySelector("#mountains");
+        const mntTable = document.createElement("table");
+
+        // Obtain the property names from the first row if existing.
+        if (!(MOUNTAINS.length <= 0)) {
+            let row = document.createElement("tr");
+            const pNames = Object.getOwnPropertyNames(MOUNTAINS[0]);
+            for (let i = 0; i < pNames.length; i++) {
+                const header = document.createElement("th");
+                const headerText = document.createTextNode(pNames[i]);
+                header.appendChild(headerText);
+                header.classList.add("tableHeader");
+                row.appendChild(header);
+            }
+            mntTable.appendChild(row);
+        }
+
+        if (!(MOUNTAINS.length <= 1)) {
+            for (let i = 0; i < MOUNTAINS.length; i++) {
+                let row = document.createElement("tr");
+                for (const key in MOUNTAINS[i]) {
+                    const col = document.createElement("td");
+                    const colText = document.createTextNode(MOUNTAINS[i][key]);
+                    if (Number.isFinite(Number(MOUNTAINS[i][key]))) {
+                        col.classList.add("numberColumn");
+                    }
+                    col.appendChild(colText);
+                    row.appendChild(col);
+                }
+                mntTable.appendChild(row);
+            }
+        }
+
+        mntTable.classList.add("mountainTable");
+        
+        mntDiv.appendChild(mntTable);
+
+      </script>
+
+
+</body>
+</html>

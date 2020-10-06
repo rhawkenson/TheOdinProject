@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .activeButton {
+            background-color: #c99;
+            border: solid 1px #000;
+            border-bottom: 0px;
+            min-width: 100px;
+            min-height: 50px;
+            padding: 5px;
+        }
+        .inactiveButton {
+            background-color: #ccc;
+            min-width: 100px;
+            min-height: 50px;
+            padding: 5px;
+            border: none;
+        }
+        .inactiveTab {
+            background-color: #999;
+            display: none;
+        }
+        .activeTab {
+            display: block;
+            background-color: #f99;
+            border: solid 1px #000;
+            min-height: 300px;
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <tab-panel>
+        <div data-tabname="one">Tab one</div>
+        <div data-tabname="two">Tab two</div>
+        <div data-tabname="three">Tab three</div>
+      </tab-panel>
+      <script>
+        function asTabs(node) {
+          // tab-panel should have 3 buttons at the top
+          let tabs = Array.from(node.children);
+          const elts = tabs.length;
+          for (i = 0; i < elts; i++) {
+            console.log(tabs[i]);
+            let button = document.createElement("button");
+            button.textContent = tabs[i].getAttribute("data-tabname");
+            node.insertBefore(button, tabs[0]);
+          }
+          displayTabs("one");
+        }
+          
+        function displayTabs(displayTab) {
+            let tabs = document.querySelector("tab-panel").children;
+            console.log(tabs);
+            for (const tab of tabs) {
+                if (tab.tagName === "DIV") {
+                    tab.classList.add("inactiveTab");
+                    tab.classList.remove("activeTab");
+                }
+                if (tab.tagName === "BUTTON") {
+                    tab.classList.add("inactiveButton");
+                    tab.classList.remove("activeButton");
+                }
+            }
+            for (const tab of tabs) {
+                if (tab.textContent === displayTab) {
+                    tab.classList.add("activeButton");
+                    tab.classList.remove("inactiveButton");
+                } else if (tab.getAttribute("data-tabname") === displayTab) {
+                    tab.classList.add("activeTab");
+                    tab.classList.remove("inactiveTab");
+                }
+            }            
+        }
+
+        document.body.addEventListener("click", event => {
+            if (event.target.nodeName == "BUTTON") {
+                displayTabs(event.target.textContent);
+            }
+        });
+
+          // those 3 buttons must be the data-tabnames
+          // tabs should be hidden except one
+          // when clicking one tab, it should display it and hide the others
+        asTabs(document.querySelector("tab-panel"));
+      </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .trail { /* className for the trail elements */
+          position: absolute;
+          height: 6px; width: 6px;
+          border-radius: 3px;
+          background: teal;
+        }
+        body {
+          height: 300px;
+        }
+      </style>
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Your code here.
+        // Use abs pos div with fixed size and bg color
+        // when mouse move items move following the pointer
+
+        // simple solution is fix number of trail elts and cycle through them
+        // moving the next one to the mouses current pos every time mouse moves
+        for (let i = 0; i < 20; i++) {
+            let body = document.querySelector("body");
+            let div = document.createElement("div");
+            div.classList.add("trail");
+            body.appendChild(div);
+        }
+
+        let divs = document.getElementsByTagName("div");
+        let currentDot = 0;
+        let mouseX = 0;
+        let mouseY = 0;
+        const speed = 0.05;
+
+        window.addEventListener("mousemove", event => {
+            currentDot = currentDot < divs.length - 1 ? currentDot + 1 : 0;
+            mouseX = event.clientX;
+            mouseY = event.clientY;
+            divs[currentDot].style.left = mouseX + 'px';
+            divs[currentDot].style.top = mouseY + 'px';
+        });
+
+        function slideDots() {
+            for (let i = 0; i < divs.length; i++) {
+                let left = parseFloat(window.getComputedStyle(divs[i], null).getPropertyValue('left'));
+                let top = parseFloat(window.getComputedStyle(divs[i], null).getPropertyValue('top'));
+
+                divs[i].style.left = left + (mouseX - left) * speed + 'px';
+                divs[i].style.top = top + (mouseY - top) * speed + 'px';
+            }
+            requestAnimationFrame(slideDots);
+        }
+
+        slideDots();
+
+      </script>
+</body>
+</html>
