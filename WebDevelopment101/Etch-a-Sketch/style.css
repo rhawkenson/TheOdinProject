@@ -25,10 +25,17 @@ body, div {
     display: grid;
 }
 
-#resetbtn {
+#colorpicker {
     position: fixed;
-    top: 5px;
-    left: 5px;
+    min-width: 50px;
+    min-height: 50px;
+    right: 5px;
+    bottom: 5px;
+    background-color: #000000;
+}
+
+.btn {
+    position: fixed;
     min-width: 300px;
     height: 30px;
     padding: 5px;
@@ -39,4 +46,34 @@ body, div {
     text-align: center;
     display: block;
     margin: auto;
+}
+
+#resetbtn {
+    top: 5px;
+    left: 5px;
+    background-color: #99c;
+}
+
+#blackbtn {
+    top: 45px;
+    left: 5px;
+    background-color: #99c;
+}
+
+#rainbowbtn {
+    top: 85px;
+    left: 5px;
+    background-color: #99c;
+}
+
+#fixrandombtn {
+    top: 125px;
+    left: 5px;
+    background-color: #99c;
+}
+
+#randomhexbtn {
+    top: 165px;
+    left: 5px;
+    background-color: #99c;
 }
