@@ -1,0 +1,172 @@
+:root {
+    --purple-000: #1e1e3f;
+    --purple-001: #2d2b55;
+    --purple-002: #ad70fc46;
+    --yellow-000: #fad000;
+    --pink-000: #b362ff88;
+    --pink-001: #b362ff;
+    --white-000: #fff;
+    --black-000: #000;
+    --row-height: 80px;
+    --col-width: 120px;
+    --font-size-small: 20px;
+    --font-size-medium: 32px;
+    --font-size-large: 48px;
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                        supported by Chrome, Edge, Opera and Firefox */
+    box-sizing: border-box;
+}
+
+@media only screen and (max-width: 800px) {
+    #content {
+        grid-template-columns: 1fr;
+        margin: 10px;
+    }
+    #sourcecode {
+        display: none;
+    }
+    :root {
+        --row-height: 40px;
+        --col-width: 60px;
+        --font-size-small: 10px;
+        --font-size-medium: 16px;
+        --font-size-large: 24px;
+    }
+}
+
+body {
+    margin: 0 auto;
+    background-color: #1e1e3f;
+}
+
+#content {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 0.75fr 1.25fr;
+    margin: 50px;
+    align-items: center;
+    max-height: 80vh;
+}
+
+#sourcecode {
+    height: calc(6.5 * var(--row-height));
+    max-height: calc(6.5 * var(--row-height));
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    text-align: right;
+    padding: 20px;
+    font-family: Menlo, Monaco, 'Courier New', monospace;
+    font-size: var(--font-size-small);
+    color: var(--yellow-000);
+    border: solid 1px var(--yellow-000);
+    white-space: pre-wrap;
+
+    -webkit-touch-callout: text; /* iOS Safari */
+    -webkit-user-select: text; /* Safari */
+    -khtml-user-select: text; /* Konqueror HTML */
+    -moz-user-select: text; /* Old versions of Firefox */
+    -ms-user-select: text; /* Internet Explorer/Edge */
+    user-select: text; /* Non-prefixed version, currently
+                        supported by Chrome, Edge, Opera and Firefox */
+}
+
+#left, #right {
+    height: 100%;
+}
+
+.gridbase {
+    background-color: #2d2b55;
+    margin: 0 auto;
+    display: grid;
+    width: calc(var(--col-width) * 4 + 20px);
+    max-width: calc(var(--col-width) * 4 + 20px);
+    padding: 20px;
+    border-radius: 20px;
+    grid-template-rows: repeat(6, var(--row-height));
+    grid-template-columns: repeat(4, var(--col-width));
+    grid-gap: 10px;
+    justify-content: center;
+}
+
+.gridbase > div {
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-size: var(--font-size-medium);
+    font-weight: 800;
+    border: solid 1px #000;
+    text-align: center;
+    vertical-align: center;
+    line-height: var(--row-height);
+}
+
+.gridscreen, #calc_screen {
+    grid-area: 1/1/2/5;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    background-color: #1e1e3f;
+    font-family: sans-serif;
+    font-size: var(--font-size-large);
+    color: #fff;
+    text-align: right;
+    padding-right: 5px;
+}
+    .gridscreen, .gridscreen:hover, .gridscreen:active,
+    #calc_screen, #calc_screen:hover, #calc_screen:active {
+        background-color: #1e1e3f;
+        font-family: sans-serif;
+        font-size: var(--font-size-large);
+        color: #fff;
+        text-align: right;
+        padding-right: 5px;
+    }
+    .gridscreen::-webkit-scrollbar {
+        display: none;
+    }
+
+.gridc {
+    grid-area: 2/1/3/3;
+    font-size: var(--font-size-medium);
+}
+
+.gridce {
+    grid-area: 2/3/3/5;
+    font-size: var(--font-size-medium);
+}
+
+.gridnumber, .gridc, .gridce, .griddot {
+    background-color: #ad70fc46;
+    border: solid 1px #1e1e3f;
+    color: #fad000;
+}
+    .gridnumber:hover, .gridc:hover, .gridce:hover, .griddot:hover  {
+        background-color: #b362ff88;
+    }
+    .gridnumber:active, .gridc:active, .gridce:active, .griddot:active {
+        background-color: #b362ff;
+    }
+
+.gridoperator, .gridequal {
+    background-color: #ad70fc46;
+    border: solid 1px #1e1e3f;
+    color: #fad000;
+}
+    .gridoperator:hover, .gridequal:hover {
+        background-color: #b362ff88;
+    }
+    .gridoperator:active, .gridequal:active {
+        background-color: #b362ff;
+    }
+
+.gridequal {
+
+}
+
