@@ -19,7 +19,7 @@ function operate(operator, nb1, nb2) {
         case "!": result = factorial(nb1); break;
         case "√": result = squareroot(nb1); break;
     }
-    n1 = screen.textContent = result;
+    n1 = screen.textContent = Math.round(result * 100 + Number.EPSILON) / 100;
     if (nb2) {
         sourcecode.textContent += `\n${nb1} ${operator} ${nb2} = ${result}\n`;
     } else if (operator === "!") {
@@ -87,7 +87,10 @@ function calc_add_number(number) {
 
 function calc_clearc() { 
     calcstate = "leavemealone";
-    screen.textContent = ""; 
+    screen.textContent = "";
+    n1 = 0;
+    n2 = 0;
+    operator = "";
 }
 
 function calc_clearce() {
@@ -100,8 +103,8 @@ function calc_add_dot() {
         calcstate = "leavemealone";
         screen.textContent = "";
     }
-    // no dot > dot and no operator > dot and operator and no dot > 2 dots
-    if (!(/[\!\√]+/.test(screen.textContent))) {
+
+    if ((/[\!\√]+/.test(screen.textContent))) {
         // do nothing because factorial or squareroot
     } else if (!screen.textContent.includes(".")) {
         // no dot
@@ -138,14 +141,15 @@ function calc_add_operator(op) {
 function calc_equal() {
     if ((/[\!\√]+/.test(screen.textContent)) && n1) {
         operate(operator, n1);
-    } else {
+    } else if ((/\d+.+[\*\/\+\-\!\^\%]+.+\d+/.test(screen.textContent))) {
         let operation = screen.textContent.split(' ');
         n1 = operation[0];
         operator = operation[1];
         n2 = operation[2];
-        if (operator != "" && n1 && n2 && n2 != ".") {
-            operate(operator, n1, n2);
-        }
+        if (operator == "/" && n2 == 0) {
+            screen.textContent = "Can't divide by 0";
+            calcstate = "wipeme";
+        } else { operate(operator, n1, n2); }
     }
 }
 
