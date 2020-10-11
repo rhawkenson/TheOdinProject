@@ -13,6 +13,7 @@ class TicTacToe
     play_game()
   end
 
+  private
   def play_game()
     win_pattern = ""
     until @@game_end == true
