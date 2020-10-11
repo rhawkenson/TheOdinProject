@@ -3,17 +3,22 @@ class TicTacToe
   @@player_turn = 1
 
   def initialize()
-    puts "Game starts!"
+    start_game()
+  end
+
+  private
+  def start_game()
+    puts "\nGame starts!"
     @board = Board.new
     @players = []
     @players[1] = Player.new(1, "X")
     puts "Player 1 has symbol #{@players[1].symbol}"
     @players[2] = Player.new(2, "O")
     puts "Player 2 has symbol #{@players[2].symbol}"
+    @@player_turn = 1 + rand(2)
     play_game()
   end
-
-  private
+  
   def play_game()
     win_pattern = ""
     until @@game_end == true
@@ -34,11 +39,17 @@ class TicTacToe
         end
       end
     end
+    print "\nReplay? [Y]es or any other key to exit. "
+    key = gets.chomp
+    if key.to_s[0].downcase == "y"
+      @@game_end = false
+      start_game()
+    end
   end
 
   def get_player_move(id, symbol)
     # ask for the player's move
-    puts "Player #{id}'s turn! Using the symbol #{symbol}"
+    puts "\nPlayer #{id}'s turn! Using the symbol #{symbol}"
     valid = false
     until valid
       print "Input the number of the cell selected: "
@@ -74,7 +85,8 @@ class Board
   public
   def display_board()
     # lazy way to display the board
-    separator = ["|","|","\n"]
+    puts ""
+    separator = [" | "," | ","\n"]
     for i in (0..8)
       print @board_cells[i].symbol + separator[i % 3]
     end
