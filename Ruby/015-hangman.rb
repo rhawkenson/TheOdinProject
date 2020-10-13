@@ -6,10 +6,9 @@ class Hangman
   def initialize
     print_title()
     choice = ""
-    until ["N","L"].include?(choice)
+    until choice == "N" or choice == "L"
       print "[N]ew game? [L]oad a saved game? "
-      choice = gets.chomp
-      choice.length > 0 ? choice = choice.to_s[0].upcase : choice = ""
+      choice = gets.chomp.upcase
     end
     puts ""
     if choice == "L" ? load_saved_game() : load_new_game()
@@ -90,11 +89,11 @@ class Hangman
     puts @@game_end ? "Congratulations, you won!" : "Try Again!"
     # replay message
     print "\n[R]eplay, [L]oad game or any other key to exit. "
-    key = gets.chomp
-    if key.to_s[0] == "r" || key.to_s[0] == "R"
+    key = gets.chomp.upcase
+    if key.to_s[0] == "R"
       @@game_end = false
       load_new_game()
-    elsif key.to_s[0] == "l" || key.to_s[0] == "L"
+    elsif key.to_s[0] == "L"
       @@game_end = false
       load_saved_game()
     end
