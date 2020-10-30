@@ -27,9 +27,8 @@ class LinkedList
       @head = my_node
       @tail = my_node
     else
-      tmp = @head
+      my_node.next_node = @head
       @head = my_node
-      @head.next_node = tmp
     end
   end
 
