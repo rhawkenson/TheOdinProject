@@ -116,3 +116,33 @@ while i <= m and j <= n,
 while i <= m,
     a[k++] = b[i++]
     → invariant: a[1..k] in final position
+
+
+## with inject
+puts "Heaviest rock is: #{rocks.inject{|max_rock, rock| max_rock > rock ? max_rock : rock}}"
+
+
+def rock_judger(r_arr)     
+    count = r_arr.length
+    a,b =  count <= 2 ? [r_arr[0], r_arr[-1]] : [rock_judger(r_arr.pop(count/2)), rock_judger(r_arr)]
+    return a > b ? a : b
+end
+
+https://www.codequizzes.com/computer-science/beginner/recursion
+
+def int_to_roman(nb, roman)
+	return roman if nb == 0
+	
+	roman_mapping each do |key, value|
+		if nb > key
+			roman << roman_mapping[key]
+			nb = nb - key
+			break
+	
+	int_to_roman (nb, roman)
+end
+
+
+efficient recursion:
+	- do not do again and again the same calculation
+	- do not use too much stack space : use tail recursion (accumulating and calling again the function iteratively)

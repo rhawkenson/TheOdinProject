@@ -84,4 +84,4 @@ total_normal = get_all_matches(114, 430) # Fiora Normal
 total_ranked = get_all_matches(114, 420) # Fiora Ranked
 puts "- - -"
 puts "\nTotal Mastery Points for Fiora is #{total_mastery}."
-puts "Total normal: #{total_normal}, Total ranked: #{total_ranked}, Total Summoner Rift: #{total_normal + total_ranked}"
+puts "Total normal: #{total_normal}, Total ranked: #{total_ranked}, Total Summoner Rift: #{total_normal + total_ranked}" 
