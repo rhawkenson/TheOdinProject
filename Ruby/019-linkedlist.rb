@@ -45,13 +45,11 @@ class LinkedList
 
   def head
     # return the first node in the list
-    puts "Value: #{@head.value}"
     return @head
   end
 
   def tail
     # return the last node in the list
-    puts "Value: #{@tail.value}"
     return @tail
   end
 
