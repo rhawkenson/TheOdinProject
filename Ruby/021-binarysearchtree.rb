@@ -10,20 +10,15 @@ end
 
 class Tree
   attr_accessor :root, :right, :left
-  def initialize()
-    @root = nil
+  def initialize(arr)
+    @root = build_tree(arr)
   end
   def build_tree(arr)
+    return nil unless arr.last
     arr = arr.uniq.sort
     root = Node.new(arr[(arr.length)/2])
-    return root if arr.length == 1
-    @root = root if @root == nil
-    left = arr[0, arr.length/2]
-    right = arr[arr.length/2+1, arr.length]
-    root.left = build_tree(left) if left.length >= 1
-    @root.left = root.left if @root.left == nil
-    root.right = build_tree(right) if right.length >= 1
-    @root.right = root.right if @root.right == nil
+    root.left = build_tree(arr[0, arr.length/2])
+    root.right = build_tree(arr[arr.length/2+1, arr.length])
     return root
   end
   def insert(value, node=@root)
@@ -263,8 +258,7 @@ class Tree
   def rebalance
     # rebalance an unbalanced tree
     arr = level_order
-    @root = nil
-    build_tree(arr)
+    @root = build_tree(arr)
   end
   def pretty_print(node = @root, prefix = '', is_left = true)
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
@@ -277,8 +271,7 @@ def simple_driver_script
   # 1. Create a binary search tree from an array of random numbers (`Array.new(15) { rand(1..100) }`)
   arr = Array.new(15) { rand(1..100) }
   p "Building tree with Array: #{arr}"
-  my_tree = Tree.new
-  my_tree.build_tree(arr)
+  my_tree = Tree.new(arr)
   puts ""
   my_tree.pretty_print
   puts ""
